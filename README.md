@@ -229,7 +229,7 @@ caia_system_design/
 ### 1️⃣ Clone Repository
 
 ```bash id="clone"
-git clone https://github.com/mann2007-ptl/caia_system_design_mann_patel.git
+git clone whttps://github.com/mann2007-ptl/caia_system_design_mann_patel.git
 ```
 
 ---
