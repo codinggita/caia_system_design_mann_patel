@@ -4,6 +4,7 @@ const cors = require("cors");
 // Import routes
 const conceptRoutes = require("./routes/prompt.routes");
 const taxonomyRoutes = require("./routes/taxonomy.routes");
+const searchRoutes = require("./routes/search.routes");
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(express.json());
 // Routes
 app.use("/api/v1/concepts", conceptRoutes);
 app.use("/api/v1", taxonomyRoutes);
+app.use("/api/v1/search", searchRoutes);
 
 module.exports = app;
