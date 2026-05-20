@@ -11,7 +11,12 @@ const {
     getTopBookmarkedConcepts,
     getTrendingAnalytics,
     getMonthlyGrowth,
-    getTopSearchedKeywords
+    getTopSearchedKeywords,
+    getFailedSearches,
+    getUserEngagement,
+    getApiPerformance,
+    getDatabasePerformance,
+    getCacheHitRate
 } = require("../controllers/analytics.controller");
 
 // ==========================================
@@ -48,5 +53,19 @@ router.get("/growth", getMonthlyGrowth);
 // Matches: /api/v1/analytics/searches/top
 router.get("/searches/top", getTopSearchedKeywords);
 
-module.exports = router;
+// Matches: /api/v1/analytics/searches/failed
+router.get("/searches/failed", getFailedSearches);
 
+// Matches: /api/v1/analytics/engagement
+router.get("/engagement", getUserEngagement);
+
+// Matches: /api/v1/analytics/api-performance
+router.get("/api-performance", getApiPerformance);
+
+// Matches: /api/v1/analytics/database-performance
+router.get("/database-performance", getDatabasePerformance);
+
+// Matches: /api/v1/analytics/cache-hit-rate
+router.get("/cache-hit-rate", getCacheHitRate);
+
+module.exports = router;
