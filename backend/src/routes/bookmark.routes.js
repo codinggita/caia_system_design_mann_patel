@@ -7,6 +7,10 @@ const {
     getAllBookmarks,
     addNotes,
     getNotes,
+    updateNotes,
+    deleteNotes,
+    voteOnConcept,
+    getTopVotedConcepts,
 } = require("../controllers/bookmark.controller");
 
 // ──────────────────────────────────────────────
@@ -31,5 +35,21 @@ router.post("/notes/:conceptId", addNotes);
 
 // GET /api/v1/notes/:conceptId — fetch notes for a concept
 router.get("/notes/:conceptId", getNotes);
+
+// PATCH /api/v1/notes/:noteId — update an existing note
+router.patch("/notes/:noteId", updateNotes);
+
+// DELETE /api/v1/notes/:noteId — delete notes from a concept
+router.delete("/notes/:noteId", deleteNotes);
+
+// ──────────────────────────────────────────────
+//  VOTES ROUTES  →  mounted at /api/v1/votes
+// ──────────────────────────────────────────────
+
+// POST /api/v1/votes/:conceptId — vote on a concept
+router.post("/votes/:conceptId", voteOnConcept);
+
+// GET /api/v1/votes/top — fetch top voted concepts
+router.get("/votes/top", getTopVotedConcepts);
 
 module.exports = router;
