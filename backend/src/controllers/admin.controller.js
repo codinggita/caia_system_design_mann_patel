@@ -1,5 +1,8 @@
 const User = require("../models/user.model");
 
+// Global variable for Maintenance Mode simulation
+let isMaintenanceMode = false;
+
 // =============================================
 // @desc    Fetch all users
 // @route   GET /api/v1/admin/users
@@ -199,10 +202,149 @@ const unbanUser = async (req, res) => {
     }
 };
 
+// =============================================
+// @desc    Fetch audit logs
+// @route   GET /api/v1/admin/logs
+// @access  Private (Admin only)
+// =============================================
+const getAuditLogs = async (req, res) => {
+    try {
+        // Mock audit logs since we don't have a Mongo collection for them yet
+        const mockAuditLogs = [
+            { id: 1, action: "USER_BANNED", adminId: req.user._id, targetId: "user_123", timestamp: new Date() },
+            { id: 2, action: "ROLE_UPDATED", adminId: req.user._id, targetId: "user_456", timestamp: new Date() }
+        ];
+
+        res.status(200).json({
+            success: true,
+            message: "Audit logs fetched successfully",
+            count: mockAuditLogs.length,
+            data: mockAuditLogs,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message,
+        });
+    }
+};
+
+// =============================================
+// @desc    Get system health status
+// @route   GET /api/v1/admin/system/health
+// @access  Private (Admin only)
+// =============================================
+const getSystemHealth = async (req, res) => {
+    try {
+        // Get Mongoose status
+        const mongoose = require("mongoose");
+        const dbStatus = mongoose.connection.readyState === 1 ? "connected" : "disconnected";
+
+        const healthData = {
+            status: "healthy",
+            uptimeSeconds: Math.floor(process.uptime()),
+            timestamp: new Date(),
+            database: dbStatus,
+            memoryUsage: process.memoryUsage(),
+        };
+
+        res.status(200).json({
+            success: true,
+            message: "System health fetched successfully",
+            data: healthData,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message,
+        });
+    }
+};
+
+// =============================================
+// @desc    Get system logs
+// @route   GET /api/v1/admin/system/logs
+// @access  Private (Admin only)
+// =============================================
+const getSystemLogs = async (req, res) => {
+    try {
+        // Mock system logs (warnings, errors)
+        const mockSystemLogs = [
+            { type: "WARNING", message: "High memory usage detected", timestamp: new Date() },
+            { type: "ERROR", message: "Failed API request from IP 192.168.1.5", timestamp: new Date() }
+        ];
+
+        res.status(200).json({
+            success: true,
+            message: "System logs fetched successfully",
+            count: mockSystemLogs.length,
+            data: mockSystemLogs,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message,
+        });
+    }
+};
+
+// =============================================
+// @desc    Clear API/Database Cache
+// @route   DELETE /api/v1/admin/cache/clear
+// @access  Private (Admin only)
+// =============================================
+const clearCache = async (req, res) => {
+    try {
+        // Since we don't have Redis or a real cache yet, we simulate the action
+        res.status(200).json({
+            success: true,
+            message: "System cache cleared successfully",
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message,
+        });
+    }
+};
+
+// =============================================
+// @desc    Toggle Maintenance Mode
+// @route   POST /api/v1/admin/system/maintenance
+// @access  Private (Admin only)
+// =============================================
+const toggleMaintenance = async (req, res) => {
+    try {
+        // Toggle the global in-memory variable
+        isMaintenanceMode = !isMaintenanceMode;
+
+        res.status(200).json({
+            success: true,
+            message: `Maintenance mode is now ${isMaintenanceMode ? "ON" : "OFF"}`,
+            isMaintenanceMode: isMaintenanceMode,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Server error",
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     getAllUsers,
     getUserById,
     updateUserRole,
     banUser,
     unbanUser,
+    getAuditLogs,
+    getSystemHealth,
+    getSystemLogs,
+    clearCache,
+    toggleMaintenance,
 };

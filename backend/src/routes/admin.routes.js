@@ -5,6 +5,11 @@ const {
     updateUserRole,
     banUser,
     unbanUser,
+    getAuditLogs,
+    getSystemHealth,
+    getSystemLogs,
+    clearCache,
+    toggleMaintenance,
 } = require("../controllers/admin.controller");
 const { authenticate } = require("../middlewares/auth.middleware");
 const { authorizeAdmin } = require("../middlewares/admin.middleware");
@@ -15,10 +20,18 @@ const router = express.Router();
 // authenticate -> checks if user is logged in (valid JWT)
 // authorizeAdmin -> checks if logged-in user has "admin" role
 
-router.get("/", authenticate, authorizeAdmin, getAllUsers);
-router.get("/:id", authenticate, authorizeAdmin, getUserById);
-router.patch("/:id/role", authenticate, authorizeAdmin, updateUserRole);
-router.patch("/:id/ban", authenticate, authorizeAdmin, banUser);
-router.patch("/:id/unban", authenticate, authorizeAdmin, unbanUser);
+// User Management Routes
+router.get("/users", authenticate, authorizeAdmin, getAllUsers);
+router.get("/users/:id", authenticate, authorizeAdmin, getUserById);
+router.patch("/users/:id/role", authenticate, authorizeAdmin, updateUserRole);
+router.patch("/users/:id/ban", authenticate, authorizeAdmin, banUser);
+router.patch("/users/:id/unban", authenticate, authorizeAdmin, unbanUser);
+
+// System Admin Routes
+router.get("/logs", authenticate, authorizeAdmin, getAuditLogs);
+router.get("/system/health", authenticate, authorizeAdmin, getSystemHealth);
+router.get("/system/logs", authenticate, authorizeAdmin, getSystemLogs);
+router.delete("/cache/clear", authenticate, authorizeAdmin, clearCache);
+router.post("/system/maintenance", authenticate, authorizeAdmin, toggleMaintenance);
 
 module.exports = router;
