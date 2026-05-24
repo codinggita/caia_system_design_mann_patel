@@ -47,6 +47,6 @@ app.use("/api/v1/analytics", analyticsRoutes);
 app.use("/api/v1/discovery", discoveryRoutes);
 app.use("/api/v1", bookmarkRoutes);
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/admin/users", adminRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 module.exports = app;
