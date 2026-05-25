@@ -15,6 +15,7 @@ const bulkOperationsRoutes = require("./routes/bulkOperations.routes");
 const authRoutes = require("./routes/auth.routes");
 const adminRoutes = require("./routes/admin.routes");
 const systemRoutes = require("./routes/system.routes");
+const protectedRoutes = require("./routes/protected.routes");
 
 // Import paginated controllers for cross-domain routes
 const {
@@ -50,5 +51,6 @@ app.use("/api/v1", bookmarkRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1", systemRoutes);
+app.use("/api/v1", protectedRoutes);
 
 module.exports = app;
