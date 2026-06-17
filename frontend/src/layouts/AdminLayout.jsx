@@ -12,6 +12,7 @@ import {
 import { logout } from '../features/auth/authSlice';
 import { ROUTES } from '../constants';
 import toast from 'react-hot-toast';
+import ThemeToggle from '../components/ThemeToggle';
 
 const adminNavItems = [
     { to: ROUTES.ADMIN_DASHBOARD, icon: HiOutlineSquares2X2, label: 'Dashboard' },
@@ -126,6 +127,7 @@ const AdminLayout = () => {
                             </div>
                         </div>
                         <div className="navbar-right">
+                            <ThemeToggle />
                             <button className="navbar-icon-btn">
                                 <HiOutlineBell />
                             </button>

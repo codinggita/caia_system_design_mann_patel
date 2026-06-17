@@ -56,6 +56,27 @@
   --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+[data-theme="dark"] {
+  --color-white: #0f172a;
+  --color-snow: #0c1222;
+  --color-frost: #1e293b;
+  --color-mist: #334155;
+  --color-slate: #64748b;
+  --color-graphite: #94a3b8;
+  --color-charcoal: #cbd5e1;
+  --color-midnight: #f1f5f9;
+  --color-lavender: rgba(99, 102, 241, 0.1);
+  --color-sky: rgba(6, 182, 212, 0.08);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
 /* ─── Reset & Base ─── */
 *,
 *::before,
@@ -79,6 +100,7 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 #root {
@@ -138,6 +160,11 @@ h6 {
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 35%, #3b82f6 70%, #06b6d4 100%);
+  transition: background 0.4s ease;
+}
+
+[data-theme="dark"] .auth-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 40%, #1e3a8a 75%, #083344 100%);
 }
 
 .auth-hero::before {
@@ -446,7 +473,13 @@ h6 {
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-glass), var(--shadow-xl);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  transition: box-shadow var(--transition-base), transform var(--transition-base), background 0.4s ease, border-color 0.4s ease;
+}
+
+[data-theme="dark"] .glass-card {
+  background: rgba(15, 23, 42, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-card:hover {
@@ -557,12 +590,12 @@ h6 {
 
 .form-input:hover {
   border-color: var(--color-indigo-light);
-  background: white;
+  background: var(--color-white);
 }
 
 .form-input:focus {
   border-color: var(--color-indigo);
-  background: white;
+  background: var(--color-white);
   box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.1);
 }
 
@@ -1004,7 +1037,7 @@ h6 {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-indigo);
-  background: white;
+  background: var(--color-white);
   border: 1.5px solid var(--color-indigo);
   border-radius: var(--radius-lg);
   cursor: pointer;
@@ -1378,7 +1411,7 @@ h6 {
 .search-input:focus {
   outline: none;
   border-color: var(--color-indigo-light);
-  background: white;
+  background: var(--color-white);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
@@ -1894,7 +1927,7 @@ h6 {
   padding: 0 1.25rem;
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-lg);
-  background: white;
+  background: var(--color-white);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1915,7 +1948,7 @@ h6 {
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1.25rem;
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-lg);
   margin-bottom: 2rem;
@@ -1950,7 +1983,7 @@ h6 {
   justify-content: center;
   padding: 4rem 2rem;
   text-align: center;
-  background: white;
+  background: var(--color-white);
   border: 1px dashed var(--color-mist);
   border-radius: var(--radius-xl);
   margin: 2rem 0;
@@ -1989,7 +2022,7 @@ h6 {
 }
 
 .skeleton-card {
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-snow);
   border-radius: var(--radius-xl);
   padding: 1.5rem;
@@ -2095,7 +2128,7 @@ h6 {
 
 .pagination-btn {
   padding: 0.5rem 1rem;
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-md);
   color: var(--color-charcoal);
@@ -2185,7 +2218,7 @@ h6 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-lg);
   font-size: 0.85rem;
@@ -2234,7 +2267,7 @@ h6 {
 }
 
 .detail-response-block {
-  background: white;
+  background: var(--color-white);
   padding: 2rem;
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-mist);
@@ -2298,7 +2331,7 @@ h6 {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-white);
   padding: 2rem;
   border-radius: var(--radius-xl);
   width: 100%;
@@ -2359,7 +2392,7 @@ h6 {
 
 /* ─── Profile Page ─── */
 .profile-card {
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-xl);
   padding: 2.5rem;
@@ -2472,7 +2505,7 @@ h6 {
 }
 
 .admin-analytics-card {
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-xl);
   padding: 1.5rem;
@@ -2573,7 +2606,7 @@ h6 {
 
 /* Admin Table */
 .admin-table-container {
-  background: white;
+  background: var(--color-white);
   border: 1px solid var(--color-mist);
   border-radius: var(--radius-xl);
   overflow-x: auto;
@@ -2983,7 +3016,7 @@ h6 {
 }
 
 .nav-btn:hover {
-  background: #fff;
+  background: var(--color-white);
   border-color: var(--color-indigo);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
@@ -3215,7 +3248,7 @@ h6 {
 .admin-search-input:focus {
   outline: none;
   border-color: var(--color-indigo-light);
-  background: white;
+  background: var(--color-white);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
@@ -4154,12 +4187,12 @@ h6 {
 
 .admin-form-input:hover {
   border-color: var(--color-indigo-light);
-  background: white;
+  background: var(--color-white);
 }
 
 .admin-form-input:focus {
   border-color: var(--color-indigo);
-  background: white;
+  background: var(--color-white);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 

@@ -77,6 +77,7 @@ export const STORAGE_KEYS = {
     USER: 'user',
     REMEMBER_ME: 'rememberMe',
     SIDEBAR_COLLAPSED: 'sidebarCollapsed',
+    THEME: 'theme',
 };
 
 // User Roles
